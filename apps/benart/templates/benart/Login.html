@@ -1,20 +1,22 @@
 {% extends 'benart/layout.html' %}
 
 {%block content%}
-       
+{%load static%}
+<link rel="stylesheet" type="text/css" href="{% static 'benart/css/contact_style.css' %}" />
                 <p>Please Login Below</p>
                 <form action="login" method="POST">
                     <table>
                         <tr>
                             <td><p>Email address:</p></td>
-                            <td> <input type="text" name="email" style="width: 280px; height: 30px;"></td>
+                            <td> <input type="text" name="email" style="width: 260px; height: 30px;"></td>
                         </tr>
                         <tr>
                             <td><p>password:</p></td>
-                            <td><input id="email" type="password" name="password" style="width: 280px; height: 30px;"></td>
+                            <td><input id="email" type="password" name="password" style="width: 260px; height: 30px;"></td>
                         </tr>
                     </table>
-                    <input type="submit" value="Log In">
+                    <input type="submit" value="Log In" id="submit">
+                    <br>
                     <a href="registration">not a member? click here to register</a>
                 </form>
     
