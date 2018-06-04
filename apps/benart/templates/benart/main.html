@@ -8,9 +8,12 @@
                 <p>{{string}}</p>
                 </div>
                 {% for item in images%}
+                {%if type == item.type or type == item.allimg%}
                 <div class="highlight">
                 <img class="fancybox" class='image' src="{% static item.img %}" alt='image' height="200px" width="300px" >
                 </div>
+                {%endif%}
+        
                 {%endfor%}
         <link rel="stylesheet" type="text/css" media="screen" href="http://cdnjs.cloudflare.com/ajax/libs/fancybox/1.3.4/jquery.fancybox-1.3.4.css" />
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>

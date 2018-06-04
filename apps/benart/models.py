@@ -35,28 +35,11 @@ class UserManager(models.Manager):
 class images(models.Model):
     id = models.AutoField(primary_key = True)
     img = models.CharField(max_length = 255)
+    allimg = models.IntegerField()
+    type = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
-class drawings(models.Model):
-    id = models.AutoField(primary_key = True)
-    img = models.CharField(max_length = 255)
-    created_at = models.DateTimeField(auto_now_add = True)
-    updated_at = models.DateTimeField(auto_now = True)
-class paintings(models.Model):
-    id = models.AutoField(primary_key = True)
-    img = models.CharField(max_length = 255)
-    created_at = models.DateTimeField(auto_now_add = True)
-    updated_at = models.DateTimeField(auto_now = True)
-class art3d(models.Model):
-    id = models.AutoField(primary_key = True)
-    img = models.CharField(max_length = 255)
-    created_at = models.DateTimeField(auto_now_add = True)
-    updated_at = models.DateTimeField(auto_now = True)
-class gameArt(models.Model):
-    id = models.AutoField(primary_key = True)
-    img = models.CharField(max_length = 255)
-    created_at = models.DateTimeField(auto_now_add = True)
-    updated_at = models.DateTimeField(auto_now = True)
+
 class user(models.Model):
     id = models.AutoField(primary_key = True)
     first_name = models.CharField(max_length = 255)
@@ -67,3 +50,11 @@ class user(models.Model):
     password = models.CharField(max_length = 255)
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
+
+class comment(models.Model):
+    comment = models.TextField(max_length = 1000)
+    images = models.ForeignKey('images', related_name='comments')
+    user = models.ForeignKey('user', related_name='comments')
+    created_at = models.DateTimeField(auto_now_add = True)
+    updated_at = models.DateTimeField(auto_now = True)
+
