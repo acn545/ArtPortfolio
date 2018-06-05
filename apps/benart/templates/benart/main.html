@@ -3,6 +3,13 @@
 {%block content%}
 
         {%load static%}
+        {% if messages %}
+    <ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+    </ul>
+{% endif %}
               <div id="text_box">
                 <h1>Ben Hawkin's Art Portfolio</h1>
                 <p>{{string}}</p>

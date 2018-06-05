@@ -10,5 +10,7 @@ urlpatterns = [
     url(r'^3dart$', views.threed),
     url(r'^gameart$', views.game),
     url(r'^login$', views.login),
-
+    url(r'^registration$', views.registration),
+    url(r'^register$', views.register),
+    url(r'^validate_login$', views.validate_login),
 ]

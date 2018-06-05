@@ -11,7 +11,7 @@ class UserManager(models.Manager):
         if len(postData['first_name']) < 1:
             errors['first_name'] = "Please enter a valid first name"
         if len(postData['last_name']) < 1:
-            errors['last_name'] = "Please enter a valid first name"
+            errors['last_name'] = "Please enter a valid last name"
         if not EMAIL_REGEX.match(postData['email']):
             errors['email'] = "Please enter a valid email address"
         if len(postData['password']) < 8:
@@ -25,7 +25,7 @@ class UserManager(models.Manager):
         if not EMAIL_REGEX.match(postData['email']):
             errors['email'] = "Please Enter a Valid Email Address"
             return errors
-        if str(user.first()) == "None":
+        if postData['email'] != users[0].email:
             errors['notfound'] = "Email Address is not registered"
             return errors;
         if bcrypt.checkpw(postData['password'].encode(), users[0].password.encode()) == False:
@@ -44,12 +44,14 @@ class user(models.Model):
     id = models.AutoField(primary_key = True)
     first_name = models.CharField(max_length = 255)
     last_name = models.CharField(max_length = 255)
+    phone = models.CharField(max_length = 255)
     user_name = models.CharField(max_length = 255)
     user_level = models.CharField(max_length = 255)
     email = models.CharField(max_length = 255)
     password = models.CharField(max_length = 255)
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
+    objects = UserManager()
 
 class comment(models.Model):
     comment = models.TextField(max_length = 1000)
@@ -57,4 +59,3 @@ class comment(models.Model):
     user = models.ForeignKey('user', related_name='comments')
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
-

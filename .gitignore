@@ -3,3 +3,5 @@ apps/benart/models.pyc
 apps/benart/views.pyc
 apps/benart/migrations/0003_auto_20180604_1049.pyc
 apps/benart/migrations/0004_images_allimg.pyc
+*.pyc
+db.sqlite3-journal
