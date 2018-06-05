@@ -18,33 +18,45 @@ def contact(request):
 def about(request):
     return render(request, 'benart/aboutme.html')
 def paint(request):
-    context = {
-        'images': images.objects.all().order_by('-id'),
-        'string': "Paintings",
-        'type': 1
-    }
-    return render(request, "benart/main.html", context)
+    if 'email' in request.session: 
+        context = {
+            'images': images.objects.all().order_by('-id'),
+            'string': "Paintings",
+            'type': 1
+        }
+        return render(request, "benart/main.html", context)
+    else:
+        return redirect(login)
 def draw(request):
-    context = {
-        'images': images.objects.all().order_by('-id'),
-        'string': "Drawings",
-        'type': 2
-    }
-    return render(request, "benart/main.html", context)
+    if 'email' in request.session: 
+        context = {
+            'images': images.objects.all().order_by('-id'),
+            'string': "Drawings",
+            'type': 2
+        }
+        return render(request, "benart/main.html", context)
+    else:
+        return redirect(login)
 def threed(request):
-    context = {
-        'images': images.objects.all().order_by('-id'),
-        'string': "3d Art",
-        'type': 3
-    }
-    return render(request, "benart/main.html", context)
+    if 'email' in request.session: 
+        context = {
+            'images': images.objects.all().order_by('-id'),
+            'string': "3d Art",
+            'type': 3
+        }
+        return render(request, "benart/main.html", context)
+    else:
+        return redirect(login)
 def game(request):
-    context = {
-        'images': images.objects.all().order_by('-id'),
-        'string': "Game Art",
-        'type': 4
-    }
-    return render(request, "benart/main.html", context)
+    if 'email' in request.session: 
+        context = {
+            'images': images.objects.all().order_by('-id'),
+            'string': "Game Art",
+            'type': 4
+        }
+        return render(request, "benart/main.html", context)
+    else:
+        return redirect(login)
 def login(request):
     return render(request, "benart/login.html")
 def validate_login(request):
