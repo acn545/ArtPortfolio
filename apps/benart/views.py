@@ -74,6 +74,8 @@ def validate_login(request):
             users = user.objects.filter(email=request.POST['email'])
             request.session['email'] = request.POST['email']
             request.session['username'] = users[0].user_name
+            if users[0].user_level == "9":
+                return redirect(simple_upload)
             return redirect(main)
 def registration(request):
     return render(request, "benart/registration.html")
@@ -88,7 +90,11 @@ def register(request):
             hash1 = bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt())
             user.objects.create(first_name = request.POST['first_name'], last_name = request.POST['last_name'],phone = request.POST['phone'], user_name = request.POST['username'], email=request.POST['email'], password = hash1, user_level=0)
         return redirect(main)
-
+def blog(request):
+    if 'email' in request.session: 
+        return render(request, "benart/main.html", context)
+    else:
+        return redirect(login)
 def simple_upload(request):
     if request.method == 'POST' and request.FILES['myfile']:
         myfile = request.FILES['myfile']

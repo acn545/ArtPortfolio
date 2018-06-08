@@ -16,6 +16,7 @@ urlpatterns = [
     url(r'^register$', views.register),
     url(r'^validate_login$', views.validate_login),
     url(r'^dashboard$', views.simple_upload),
+    url(r'^blog$', views.blog),
 ]
 
 
