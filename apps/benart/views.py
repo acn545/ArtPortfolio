@@ -4,6 +4,10 @@ from django.shortcuts import render, redirect
 from models import images, user
 from django.contrib import messages
 import bcrypt
+
+from django.shortcuts import render
+from django.conf import settings
+from django.core.files.storage import FileSystemStorage
 # Create your views here.
 def main(request):
     context = {
@@ -84,3 +88,15 @@ def register(request):
             hash1 = bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt())
             user.objects.create(first_name = request.POST['first_name'], last_name = request.POST['last_name'],phone = request.POST['phone'], user_name = request.POST['username'], email=request.POST['email'], password = hash1, user_level=0)
         return redirect(main)
+
+def simple_upload(request):
+    if request.method == 'POST' and request.FILES['myfile']:
+        myfile = request.FILES['myfile']
+        fs = FileSystemStorage()
+        filename = fs.save(myfile.name, myfile)
+        uploaded_file_url = fs.url(filename)
+        images.objects.create(img = uploaded_file_url , allimg = 0 , type = request.POST['type'] )
+        return render(request, 'benart/dashboard.html', {
+            'uploaded_file_url': uploaded_file_url
+        })
+    return render(request, 'benart/dashboard.html')

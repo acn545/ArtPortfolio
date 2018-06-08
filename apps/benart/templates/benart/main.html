@@ -17,7 +17,8 @@
                 {% for item in images%}
                 {%if type == item.type or type == item.allimg%}
                 <div class="highlight">
-                <img class="fancybox" class='image' src="{% static item.img %}" alt='image' height="200px" width="300px" >
+                
+                <img class="fancybox" class='image' src= '{{item.img}}' alt="Failed" height="200px" width="300px">
                 </div>
                 {%endif%}
         

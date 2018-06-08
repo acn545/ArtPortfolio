@@ -1,5 +1,7 @@
 from django.conf.urls import url
-from . import views           
+from . import views
+from django.conf import settings  
+from django.conf.urls.static import static         
 urlpatterns = [
     url(r'^$', views.main),
     url(r'^home$', views.main),
@@ -13,4 +15,9 @@ urlpatterns = [
     url(r'^registration$', views.registration),
     url(r'^register$', views.register),
     url(r'^validate_login$', views.validate_login),
+    url(r'^dashboard$', views.simple_upload),
 ]
+
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
