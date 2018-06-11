@@ -1,50 +1,48 @@
 {% extends 'benart/layout.html' %}
-
 {%block content%}
-
-        {%load static%}
-        {% if messages %}
+{%load static%}
+{% if messages %}
     <ul class="messages">
     {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
     {% endfor %}
     </ul>
 {% endif %}
-              <div id="text_box">
-                <h1>Ben Hawkin's Art Portfolio</h1>
-                <p>{{string}}</p>
-                </div>
-                {% for item in images%}
-                {%if type == item.type or type == item.allimg%}
-                <div class="highlight">
-                
-                <img class="fancybox" class='image' src= '{{item.img}}' alt="Failed" height="200px" width="300px">
-                </div>
-                {%endif%}
-        
-                {%endfor%}
-        <link rel="stylesheet" type="text/css" media="screen" href="http://cdnjs.cloudflare.com/ajax/libs/fancybox/1.3.4/jquery.fancybox-1.3.4.css" />
-        <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-        <script type="text/javascript" src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/fancybox/1.3.4/jquery.fancybox-1.3.4.pack.min.js"></script>
-        <script type="text/javascript">
-            $(function($){
-                var addToAll = false;
-                var gallery = true;
-                var titlePosition = 'inside';
-                $(addToAll ? 'img' : 'img.fancybox').each(function(){
-                    var $this = $(this);
-                    var title = $this.attr('title');
-                    var src = $this.attr('data-big') || $this.attr('src');
-                    var a = $('<a href="#" class="fancybox"></a>').attr('href', src).attr('title', title);
-                    $this.wrap(a);
-                });
-                if (gallery)
-                    $('a.fancybox').attr('rel', 'fancyboxgallery');
-                $('a.fancybox').fancybox({
-                    titlePosition: titlePosition
-                });
-            });
-            $.noConflict();
-        </script>
+    <div id="text_box">
+        <h1>Ben Hawkin's Art Portfolio</h1>
+        <p>{{string}}</p>
+    </div>
+    {% for item in images%}
+        {%if type == item.type or type == item.allimg%}
+            <div class="highlight">
+    
+            <img class="fancybox" class='image' src= '{{item.img}}' alt="Failed" height="200px" width="300px">
+            </div>
+        {%endif%}
+    {%endfor%}
+<!-- JavaScript imports for Image Zoom code found at http://www.dwuser.com/education/content/click-to-zoom-for-photos-adding-lightbox-effect-to-your-images/ -->
+    <link rel="stylesheet" type="text/css" media="screen" href="http://cdnjs.cloudflare.com/ajax/libs/fancybox/1.3.4/jquery.fancybox-1.3.4.css" />
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/fancybox/1.3.4/jquery.fancybox-1.3.4.pack.min.js"></script>
+    <script type="text/javascript">
+    $(function($){
+        var addToAll = false;
+        var gallery = true;
+        var titlePosition = 'inside';
+        $(addToAll ? 'img' : 'img.fancybox').each(function(){
+            var $this = $(this);
+            var title = $this.attr('title');
+            var src = $this.attr('data-big') || $this.attr('src');
+            var a = $('<a href="#" class="fancybox"></a>').attr('href', src).attr('title', title);
+            $this.wrap(a);
+        });
+        if (gallery)
+            $('a.fancybox').attr('rel', 'fancyboxgallery');
+        $('a.fancybox').fancybox({
+            titlePosition: titlePosition
+        });
+    });
+    $.noConflict();
+</script>
 {%endblock%}

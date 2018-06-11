@@ -4,7 +4,7 @@ from django.db import models
 import re, bcrypt
 # Create your models here.
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
-
+# UserManager takes care of the login and registrations validations
 class UserManager(models.Manager):
     def registration_validator(self, postData):
         errors = {}
@@ -31,7 +31,7 @@ class UserManager(models.Manager):
         if bcrypt.checkpw(postData['password'].encode(), users[0].password.encode()) == False:
             errors['password'] = 'incorrect password entered'
             return errors
-
+# database model for image location strings
 class images(models.Model):
     id = models.AutoField(primary_key = True)
     img = models.CharField(max_length = 255)
@@ -39,7 +39,7 @@ class images(models.Model):
     type = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
-
+#database model for registered users.
 class user(models.Model):
     id = models.AutoField(primary_key = True)
     first_name = models.CharField(max_length = 255)
@@ -52,7 +52,7 @@ class user(models.Model):
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
     objects = UserManager()
-
+#database Model for adding comments
 class comment(models.Model):
     comment = models.TextField(max_length = 1000)
     images = models.ForeignKey('images', related_name='comments')
